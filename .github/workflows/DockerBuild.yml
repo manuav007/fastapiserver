@@ -10,7 +10,8 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKERTOKEN }}" | docker login -u "manu990" --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "manu990" --password-stdin
+
 
       - name: Build Docker Image
         run: docker build -t manu990/fast-api:latest .
