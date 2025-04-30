@@ -1,0 +1,19 @@
+name: Docker image build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERTOKEN }}" | docker login -u "manu990"--password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t manu990/fast-api:${{ github.sha }} :latest .
+
+      - name: Push Docker Image
+        run: docker push manu990/fast-api:${{ github.sha }} :latest
+
